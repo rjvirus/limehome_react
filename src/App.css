@@ -30,7 +30,7 @@
 .App-header {
   padding: 20px 25px;
   display: flex;
-  border-bottom: 1px dotted #575758;
+  border-bottom: 1px solid #5757584d;
 }
 
 .App-body {
@@ -49,6 +49,52 @@
   width: 100%;
 }
 
+.app-card .header {
+  position: relative;
+}
+
+.app-card .action {
+  height: 250px;
+  color: #00000073;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  bottom: 0px;
+  background-color: #0000002c;
+  position: absolute;
+  background-repeat: no-repeat;
+  border: 0;
+}
+
+.app-card .action:hover {
+  background-color: #0000005b;
+  color: #ffffff;
+}
+
+.app-card #left {
+  left: 0px;
+  border-right: 1px solid #5a5a5a50;
+}
+
+.app-card #right {
+  right: 0px;
+  border-left: 1px solid #5a5a5a50;
+}
+
+#left img {
+  transform: rotate(90deg);
+  height: 20px;
+  width: 10px;
+}
+
+#right img {
+  transform: rotate(270deg);
+  height: 20px;
+  width: 10px;
+}
+
+
+
 .app-card .body {
   height: 75px;
   display: flex;
@@ -59,6 +105,11 @@
 .app-card .name {
   font-weight: 600;
   font-size: 20px;
+  text-transform: capitalize;
+}
+
+.app-card .city {
+  font-size: 18px;
   text-transform: capitalize;
 }
 
