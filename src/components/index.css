@@ -78,23 +78,23 @@
     width: 10px;
   }
   
-  .app-card #left-overlay {
+  .app-card #overlay-btn-left {
     left: 0px;
     border-right: 1px solid #5a5a5a50;
   }
   
-  .app-card #right-overlay {
+  .app-card #overlay-btn-right {
     right: 0px;
     border-left: 1px solid #5a5a5a50;
   }
   
-  #left img {
+  #overlay-btn-left img {
     transform: rotate(90deg);
     height: 20px;
     width: 10px;
   }
   
-  #right img {
+  #overlay-btn-right img {
     transform: rotate(270deg);
     height: 20px;
     width: 10px;

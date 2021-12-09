@@ -4,9 +4,10 @@ import Compressor from 'compressorjs';
 
 export default function ImageViewer(props) {
 	const { images } = props;
-	const [localImages, setLocalImages] = useState(new Array(images.length).fill(undefined));
+	const [localImages, setLocalImages] = useState(new Array(images.length).fill(undefined)); // initialize with nulls for caching
 	const [activeIndex, setActiveIndex] = useState(0);
 	const isLoading = localImages[activeIndex] === undefined;
+	const hasError = localImages[activeIndex] === null;
 
 	useEffect(() => {
 		let isActive = true;
@@ -23,7 +24,7 @@ export default function ImageViewer(props) {
 						maxWidth: 800,
 						maxHeight: 800,
 						success: (compressedResult) => {
-							if (isActive) {
+							if (isActive) { //will not call setState if cleanup task already run and the component is unmounted
 								setLocalImages(prev => {
 									let arr = [...prev];
 									arr[activeIndex] = urlCreator.createObjectURL(compressedResult);
@@ -37,7 +38,7 @@ export default function ImageViewer(props) {
 			xhr.send();
 		}
 
-		//cleanup task if component unmounted.
+		//cleanup task if setState called when component unmounted. 
 		return function () {
 			xhr.abort();
 			isActive = false;
@@ -47,14 +48,14 @@ export default function ImageViewer(props) {
 	function onClickChange(direction) {
 		if (direction === 'prev') {
 			setActiveIndex(prev => {
-				if (prev - 1 >= 0) {
+				if (prev - 1 >= 0) { //check if the image is the first image
 					return prev - 1
 				}
 				return prev
 			});
 		} else if (direction === 'next') {
 			setActiveIndex(prev => {
-				if (prev + 1 < images.length - 1) {
+				if (prev + 1 < images.length - 1) { //check if the image is the last image
 					return prev + 1
 				} else {
 					return prev
@@ -65,6 +66,7 @@ export default function ImageViewer(props) {
 
 	return (
 		<div className='image-viewer'>
+			{hasError && <p>Error loading image</p>}
 			{isLoading ? (
 				<Loader show fill />
 			) : (
@@ -74,7 +76,7 @@ export default function ImageViewer(props) {
 				/>
 			)}
 			<button
-				id='left-overlay'
+				id='overlay-btn-left'
 				className='overlay-btn'
 				title='Show previous image'
 				onClick={(e) => onClickChange('prev')}
@@ -82,9 +84,9 @@ export default function ImageViewer(props) {
 				<img alt='Prev' src='arrow.png' />
 			</button>
 			<button
+				id='overlay-btn-right'
 				className='overlay-btn'
 				title='Show next image'
-				id='right-overlay'
 				onClick={(e) => onClickChange('next')}
 			>
 				<img alt='Next' src='arrow.png' />
