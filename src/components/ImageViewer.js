@@ -9,6 +9,7 @@ export default function ImageViewer(props) {
 	const isLoading = localImages[activeIndex] === undefined;
 	const hasError = localImages[activeIndex] === null;
 
+	
 	useEffect(() => {
 		let isActive = true;
 		var xhr = new XMLHttpRequest();
