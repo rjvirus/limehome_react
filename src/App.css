@@ -1,7 +1,5 @@
 .App {
   background-color: #F7F1E9;
-  min-height: 100vh;
-  overflow-x: hidden;
 }
 
 #app-logo {
@@ -14,6 +12,10 @@
   width: 100%;
 }
 
+#loader.fill {
+  height: 100%;
+}
+
 #loader img {
   height: 50px;
   width: 50px;
@@ -24,13 +26,16 @@
 .App-header {
   padding: 20px 25px;
   display: flex;
+  height: 25px;
   justify-content: space-between;
   border-bottom: 1px solid #5757584d;
 }
 
 .App-body {
   padding: 20px;
-  min-height: 85vh;
+  height: calc(100vh - 106px);
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .app-card {
@@ -47,6 +52,7 @@
 
 .app-card .image-box {
   position: relative;
+  height: 250px;
 }
 
 .app-card .action {
