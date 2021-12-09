@@ -27,6 +27,10 @@ function App(props) {
       } else {
         setProperties(null);
       }
+    }).catch((e) => {
+      setProperties(null);
+      console.log(e.message);
+      console.log('Error fetching properties, Please check the internet')
     });
 
     fetch("http://localhost:5001/limehome-95934/us-central1/app/api/favourites", {
@@ -38,6 +42,7 @@ function App(props) {
       return setFavourites(d.data);
     }).catch((e) => {
       console.error(e.message)
+      console.log("Error fetching data, please check the local server is running or not")
     });
   }, []);
 
@@ -80,7 +85,8 @@ function App(props) {
         <Pagination disabled={!!searchText} page={currentPage} total={totalPage} updatePage={setCurrentPage} />
       </div>
       <div className="App-body">
-        <Loader show={!properties} />
+        <Loader show={properties === undefined} />
+        {properties === null && <p>Please check your internet</p>}
         {notFound && <p>No properties found</p>}
         <Cards
           properties={filteredProperties}
