@@ -2,8 +2,10 @@ import { useSnackbar } from 'react-simple-snackbar';
 import ImageViewer from './ImageViewer';
 
 export default function Card(props) {
-	const { id, images, name, location, position, selected, setFavourites } = props;
+	const { id, images, name, location, position, selected, updateFavourites } = props;
 	const [openSnackbar, closeSnackbar] = useSnackbar();
+  const tooltip = selected ? 'Remove from Favourites' : 'Add to Favourites';
+  const ratingSrc = selected ? "rating.png" : "rating_blank.png"
 
 	function onClickToggleFav(propertyId, name) {
     document.body.style.cursor = 'wait';
@@ -15,7 +17,7 @@ export default function Card(props) {
       return res.json();
     }).then(d => {
       if (d.success) {
-        setFavourites(prev => {
+        updateFavourites(prev => {
           if (selected) {
             openSnackbar(capitalize(name) + ' removed from Favourites');
             return prev.filter((_, i) => i !== position);
@@ -43,9 +45,9 @@ export default function Card(props) {
 						<p className='city'>{location.countryName}</p>
 					</div>
 					<img
-						title={selected ? 'Remove from Favourites' : 'Add to Favourites'}
+						title={tooltip}
 						className="rating-img"
-						src={selected ? "rating.png" : "rating_blank.png"}
+						src={ratingSrc}
 						onClick={(e) => onClickToggleFav(id, name)}
 						alt='favourite'
 					/>
