@@ -9,8 +9,9 @@ export default function ImageViewer(props) {
 	const isLoading = localImages[activeIndex] === undefined;
 
 	useEffect(() => {
+		let isActive = true;
+		var xhr = new XMLHttpRequest();
 		if (activeIndex !== undefined && localImages[activeIndex] === undefined) {
-			var xhr = new XMLHttpRequest();
 			xhr.open('GET', images[activeIndex].url, true);
 			xhr.responseType = 'arraybuffer';
 			xhr.onload = function (e) {
@@ -22,16 +23,24 @@ export default function ImageViewer(props) {
 						maxWidth: 800,
 						maxHeight: 800,
 						success: (compressedResult) => {
-							setLocalImages(prev => {
-								let arr = [...prev];
-								arr[activeIndex] = urlCreator.createObjectURL(compressedResult);
-								return arr
-							})
+							if (isActive) {
+								setLocalImages(prev => {
+									let arr = [...prev];
+									arr[activeIndex] = urlCreator.createObjectURL(compressedResult);
+									return arr
+								})
+							}
 						},
 					});
 				}
 			};
 			xhr.send();
+		}
+
+		//cleanup task if component unmounted.
+		return function () {
+			xhr.abort();
+			isActive = false;
 		}
 	}, [activeIndex, images, localImages]);
 
