@@ -1,7 +1,6 @@
 import './App.css';
 import { useEffect, useState, useMemo } from 'react';
 import Loader from './components/Loader';
-import Card from './components/Card';
 import Cards from './components/Cards';
 import Pagination from './components/Pagination';
 import Logo from './components/Logo';
