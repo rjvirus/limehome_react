@@ -3,7 +3,7 @@ import ImageViewer from './ImageViewer';
 
 export default function Card(props) {
 	const { id, images, name, location, position, selected, updateFavourites } = props;
-	const [openSnackbar, closeSnackbar] = useSnackbar();
+	const [openSnackbar] = useSnackbar();
   const tooltip = selected ? 'Remove from Favourites' : 'Add to Favourites';
   const ratingSrc = selected ? "rating.png" : "rating_blank.png"
 

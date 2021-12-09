@@ -6,15 +6,15 @@ export default function ImageViewer(props) {
 	const { images } = props;
 	const [localImages, setLocalImages] = useState(new Array(images.length).fill(undefined));
 	const [activeIndex, setActiveIndex] = useState(0);
-	const isLoading = localImages[activeIndex] == undefined;
+	const isLoading = localImages[activeIndex] === undefined;
 
 	useEffect(() => {
-		if (activeIndex !== undefined) {
+		if (activeIndex !== undefined && localImages[activeIndex] === undefined) {
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', images[activeIndex].url, true);
 			xhr.responseType = 'arraybuffer';
 			xhr.onload = function (e) {
-				if (this.status == 200) {
+				if (this.status === 200) {
 					var urlCreator = window.URL || window.webkitURL;
 					var myBlob = new Blob([this.response], { type: "image/jpeg" });
 					new Compressor(myBlob, {
@@ -22,20 +22,18 @@ export default function ImageViewer(props) {
 						maxWidth: 800,
 						maxHeight: 800,
 						success: (compressedResult) => {
-							if (localImages[activeIndex] == undefined) {
-								setLocalImages(prev => {
-									let arr = [...prev];
-									arr[activeIndex] = urlCreator.createObjectURL(compressedResult);
-									return arr
-								})
-							}
+							setLocalImages(prev => {
+								let arr = [...prev];
+								arr[activeIndex] = urlCreator.createObjectURL(compressedResult);
+								return arr
+							})
 						},
 					});
 				}
 			};
 			xhr.send();
 		}
-	}, [activeIndex]);
+	}, [activeIndex, images, localImages]);
 
 	function onClickChange(direction) {
 		if (direction === 'prev') {
@@ -75,10 +73,10 @@ export default function ImageViewer(props) {
 			>
 				<img alt='Prev' src='arrow.png' />
 			</button>
-			<button 
-				className='action' 
-				title='Show next image' 
-				id='right' 
+			<button
+				className='action'
+				title='Show next image'
+				id='right'
 				onClick={(e) => onClickChange('next')}
 			>
 				<img alt='Next' src='arrow.png' />

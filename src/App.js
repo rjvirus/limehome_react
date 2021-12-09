@@ -1,8 +1,7 @@
 import './App.css';
-import { useEffect, useState, useRef, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import Loader from './components/Loader';
 import Card from './components/Card';
-import { useSnackbar } from 'react-simple-snackbar';
 import Pagination from './components/Pagination';
 import Logo from './components/Logo';
 import SearchBox from './components/SearchBox';
@@ -16,9 +15,7 @@ function App(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState('');
   const [totalPage, setTotalPage] = useState(1);
-  const [openSnackbar, closeSnackbar] = useSnackbar();
-  const notFound = properties?.length && !!searchText.length && filteredProperties.length == 0
-
+  
   useEffect(() => {
     fetch("https://api.limehome.com/properties/v1/public/properties").then(res => {
       return res.json()
@@ -39,7 +36,7 @@ function App(props) {
     }).then(d => {
       return setFavourites(d.data);
     }).catch((e) => {
-      openSnackbar(e.msg ?? "Failed to fetch favourites")
+      console.error(e.message)
     });
   }, []);
 
@@ -66,7 +63,9 @@ function App(props) {
     }
 
     return invArr;
-  }, [searchText, properties, currentPage]);
+  }, [searchText, properties, currentPage, totalPage]);
+
+  const notFound = properties?.length && !!searchText.length && filteredProperties.length === 0;
 
   return (
     <div className="App">
@@ -89,11 +88,11 @@ function App(props) {
             const indexInDB = favourites.indexOf(data.id)
             return (
               <Card 
-                key={data.id} 
-                {...data} 
+                key={data.id}
                 selected={indexInDB !== -1} 
                 position={indexInDB}
-                updateFavourites={setFavourites} 
+                updateFavourites={setFavourites}
+                {...data} 
               />
             )
           })}
