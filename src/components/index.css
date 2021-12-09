@@ -108,3 +108,11 @@
     margin-top: 20px;
     cursor: pointer;
   }
+
+  /* Pagination */
+
+  .pagination .detail {
+    font-size: 14px;
+    margin-right: 10px;
+    font-weight: 600;
+  }

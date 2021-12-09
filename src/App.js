@@ -48,7 +48,11 @@ function App(props) {
       if (searchText.length > 0) {
         const updatedArrray = [];
         properties.forEach(t => {
-          if (t.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()) || t.location.countryName.toLocaleLowerCase().includes(searchText.toLocaleLowerCase())) {
+          if(searchText === 'show-fav') {
+            if(favourites.includes(t.id)) {
+              updatedArrray.push(t)
+            }
+          } else if (t.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()) || t.location.countryName.toLocaleLowerCase().includes(searchText.toLocaleLowerCase())) {
             updatedArrray.push(t)
           }
         });
@@ -64,7 +68,7 @@ function App(props) {
     }
 
     return invArr;
-  }, [searchText, properties, currentPage, totalPage]);
+  }, [searchText, properties, currentPage, totalPage, favourites]);
 
   const notFound = properties?.length && !!searchText.length && filteredProperties.length === 0;
 
@@ -72,10 +76,10 @@ function App(props) {
     <div className="App">
       <div className="App-header">
         <Logo updatePage={setCurrentPage} />
-        {!searchText && (
-          <Pagination page={currentPage} total={totalPage} updatePage={setCurrentPage} />
-        )}
+        
         <SearchBox text={searchText} onChange={(txt) => setSearchText(txt)} />
+
+        <Pagination disabled={!!searchText} page={currentPage} total={totalPage} updatePage={setCurrentPage} />
       </div>
       <div
         className="App-body"
