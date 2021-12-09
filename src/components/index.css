@@ -14,7 +14,7 @@
     margin: auto;
   }
 
-  /* Card styles */
+  /* CARD STYLES*/
   
   .app-card {
     border: 1px solid gray;
@@ -40,7 +40,7 @@
     text-transform: capitalize;
   }
 
-  /* Image viewer */
+  /* Multi Image Viewer */
   
   .app-card .image-viewer {
     position: relative;
@@ -52,6 +52,8 @@
     width: 100%;
     object-fit: cover;
   }
+  
+  /* Multi Image Viewer Overlay Button */
   
   .app-card .overlay-btn {
     height: 250px;
@@ -76,12 +78,12 @@
     width: 10px;
   }
   
-  .app-card #left {
+  .app-card #left-overlay {
     left: 0px;
     border-right: 1px solid #5a5a5a50;
   }
   
-  .app-card #right {
+  .app-card #right-overlay {
     right: 0px;
     border-left: 1px solid #5a5a5a50;
   }

@@ -65,7 +65,7 @@ export default function ImageViewer(props) {
 				/>
 			)}
 			<button
-				id='left'
+				id='left-overlay'
 				className='overlay-btn'
 				title='Show previous image'
 				onClick={(e) => onClickChange('prev')}
@@ -75,7 +75,7 @@ export default function ImageViewer(props) {
 			<button
 				className='overlay-btn'
 				title='Show next image'
-				id='right'
+				id='right-overlay'
 				onClick={(e) => onClickChange('next')}
 			>
 				<img alt='Next' src='arrow.png' />
