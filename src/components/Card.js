@@ -1,15 +1,16 @@
 import { useSnackbar } from 'react-simple-snackbar';
 import ImageViewer from './ImageViewer';
 
+const LOCAL_API = "http://localhost:5001/limehome-95934/us-central1/app/api";
 export default function Card(props) {
-	const { id, images, name, location, position, selected, updateFavourites } = props;
-	const [openSnackbar] = useSnackbar();
-  const tooltip = selected ? 'Remove from Favourites' : 'Add to Favourites';
-  const ratingSrc = selected ? "rating.png" : "rating_blank.png"
+  const { id, images, name, location, position, selected, updateFavourites } = props;
+  const [openSnackbar] = useSnackbar();
+  const ratingTooltip = selected ? 'Remove from Favourites' : 'Add to Favourites';
+  const ratingImgSrc = selected ? "rating.png" : "rating_blank.png"
 
-	function onClickToggleFav(propertyId, name) {
+  function onClickToggleFav(propertyId, name) {
     document.body.style.cursor = 'wait';
-    fetch("http://localhost:5001/limehome-95934/us-central1/app/api/favourites", {
+    fetch(LOCAL_API + "/favourites", {
       method: selected ? 'DELETE' : 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ propertyId })
@@ -29,32 +30,32 @@ export default function Card(props) {
       }
     }).catch((e) => {
       console.error(e)
-      openSnackbar("Failed to fetch favourites");
+      openSnackbar("Failed to communicate with server");
     }).finally(() => {
       document.body.style.cursor = 'default';
     });
   }
 
-	return (
-		<div className="col-xs-12 col-sm-6 col-md-4 col-lg-3" key={id}>
-			<div className="box app-card">
-				<ImageViewer images={images} />
-				<div className="body">
-					<div>
-						<p className='name'>{name}</p>
-						<p className='city'>{location.countryName}</p>
-					</div>
-					<img
-						title={tooltip}
-						className="rating-img"
-						src={ratingSrc}
-						onClick={(e) => onClickToggleFav(id, name)}
-						alt='favourite'
-					/>
-				</div>
-			</div>
-		</div>
-	)
+  return (
+    <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3" key={id}>
+      <div className="box app-card">
+        <ImageViewer images={images} />
+        <div className="body">
+          <div>
+            <p className='name'>{name}</p>
+            <p className='city'>{location.countryName}</p>
+          </div>
+          <img
+            title={ratingTooltip}
+            className="rating-img"
+            src={ratingImgSrc}
+            onClick={(e) => onClickToggleFav(id, name)}
+            alt='favourite'
+          />
+        </div>
+      </div>
+    </div>
+  )
 }
 
 const capitalize = function (s) {
