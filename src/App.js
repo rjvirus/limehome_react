@@ -14,10 +14,11 @@ function App(props) {
   const [properties, setProperties] = useState(undefined);
   const [favourites, setFavourites] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchText, setSearchText] = useState('');
   const [totalPage, setTotalPage] = useState(1);
-
+  const [searchText, setSearchText] = useState('');
+ 
   useEffect(() => {
+    //fetch properties from the public API provided by limehome
     fetch("https://api.limehome.com/properties/v1/public/properties").then(res => {
       return res.json()
     }).then(data => {
@@ -33,6 +34,8 @@ function App(props) {
       console.log('Error fetching properties, Please check the internet')
     });
 
+
+    //fetch saved favourite properties item from the local runnning REST API
     fetch("http://localhost:5001/limehome-95934/us-central1/app/api/favourites", {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
@@ -47,32 +50,33 @@ function App(props) {
   }, []);
 
   const filteredProperties = useMemo(() => {
-    let invArr = properties ?? [];
+    let updatedArr = properties ?? [];
 
     if (properties?.length) {
       if (searchText.length > 0) {
         const updatedArrray = [];
         properties.forEach(t => {
-          if (searchText === 'show-fav') {
+          if (searchText === 'show-fav') { //if show favourite button is activated
             if (favourites.includes(t.id)) {
               updatedArrray.push(t)
             }
           } else if (t.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()) || t.location.countryName.toLocaleLowerCase().includes(searchText.toLocaleLowerCase())) {
+            //check in lowercase if search text appears in any property name and country
             updatedArrray.push(t)
           }
         });
-        invArr = updatedArrray;
+        updatedArr = updatedArrray;
       } else {
-        invArr = properties;
+        updatedArr = properties;
         const updated = properties.slice((currentPage - 1) * pageLimit, currentPage * pageLimit);
         if (!updated.length) {
           setCurrentPage(totalPage.current);
         }
-        invArr = updated;
+        updatedArr = updated;
       }
     }
 
-    return invArr;
+    return updatedArr;
   }, [searchText, properties, currentPage, totalPage, favourites]);
 
   const notFound = properties?.length && !!searchText.length && filteredProperties.length === 0;
