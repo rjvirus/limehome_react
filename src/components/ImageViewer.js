@@ -6,6 +6,7 @@ export default function ImageViewer(props) {
 	const { images } = props;
 	const [localImages, setLocalImages] = useState(new Array(images.length).fill(undefined));
 	const [activeIndex, setActiveIndex] = useState(0);
+	const isLoading = localImages[activeIndex] == undefined;
 
 	useEffect(() => {
 		if (activeIndex !== undefined) {
@@ -57,7 +58,7 @@ export default function ImageViewer(props) {
 
 	return (
 		<div className='image-box'>
-			{localImages[activeIndex] == undefined ? (
+			{isLoading ? (
 				<Loader show fill />
 			) : (
 				<img
@@ -66,11 +67,21 @@ export default function ImageViewer(props) {
 					alt='Property Images'
 				/>
 			)}
-			<button className='action' title='Show previous image' id='left' onClick={(e) => onClickChange('prev')}>
-				<img alt='Prev' src='arrow.png' height="20px" width="10px" />
+			<button
+				id='left'
+				className='action'
+				title='Show previous image'
+				onClick={(e) => onClickChange('prev')}
+			>
+				<img alt='Prev' src='arrow.png' />
 			</button>
-			<button className='action' title='Show next image' id='right' onClick={(e) => onClickChange('next')}>
-				<img alt='Next' src='arrow.png' height="20px" width="20px" />
+			<button 
+				className='action' 
+				title='Show next image' 
+				id='right' 
+				onClick={(e) => onClickChange('next')}
+			>
+				<img alt='Next' src='arrow.png' />
 			</button>
 		</div>
 	)
