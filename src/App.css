@@ -21,15 +21,10 @@
   margin: auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   padding: 20px 25px;
   display: flex;
+  justify-content: space-between;
   border-bottom: 1px solid #5757584d;
 }
 
@@ -47,6 +42,7 @@
 .app-card .header-img {
   height: 250px;
   width: 100%;
+  object-fit: cover;
 }
 
 .app-card .header {
@@ -104,12 +100,17 @@
 
 .app-card .name {
   font-weight: 600;
-  font-size: 20px;
+  font-size: 16px;
   text-transform: capitalize;
 }
 
+.search {
+  width: 200px;
+  margin-bottom: 0;
+}
+
 .app-card .city {
-  font-size: 18px;
+  font-size: 16px;
   text-transform: capitalize;
 }
 

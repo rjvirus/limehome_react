@@ -1,11 +1,15 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import LazyLoad from "react-lazy-load";
+import { useSnackbar } from 'react-simple-snackbar'
 
 function App() {
 
   const [properties, setProperties] = useState(undefined);
+  const [filteredProperties, setFilteredProperties] = useState([]);
   const [favourites, setFavourites] = useState([]);
+  const [openSnackbar, closeSnackbar] = useSnackbar();
+  const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
     fetch("https://api.limehome.com/properties/v1/public/properties").then(res => {
@@ -30,7 +34,23 @@ function App() {
     });
   }, []);
 
-  function onClickToggleFav(propertyId, favIndex) {
+  useEffect(() => {
+    if (properties?.length) {
+      if (searchText.length > 0) {
+        const updatedArrray = [];
+        properties.forEach(t => {
+          if (t.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()) || t.location.countryName.toLocaleLowerCase().includes(searchText.toLocaleLowerCase())) {
+            updatedArrray.push(t)
+          }
+        });
+        setFilteredProperties(updatedArrray);
+      } else {
+        setFilteredProperties(properties);
+      }
+    }
+  }, [searchText, properties]);
+
+  function onClickToggleFav(propertyId, name, favIndex) {
     document.body.style.cursor = 'wait';
     const isFav = favIndex !== -1;
     const requestOptions = {
@@ -42,33 +62,56 @@ function App() {
       return res.json();
     }).then(d => {
       if (d.success) {
-        document.body.style.cursor = 'default';
         setFavourites(prev => {
-          if(isFav) {
-            return prev.filter((_,i) => i !== favIndex);
+          if (isFav) {
+            openSnackbar(name.capitalize() + ' removed from Favourites');
+            return prev.filter((_, i) => i !== favIndex);
           } else {
+            openSnackbar(name.capitalize() + ' added to Favourites');
             return [...prev, propertyId]
           }
         });
       }
     }).catch((e) => {
       console.error(e)
+    }).finally(() => {
+      document.body.style.cursor = 'default';
     });
+  }
+
+  function onChangeSearch(event) {
+    setSearchText(event.target.value);
   }
 
 
   return (
     <div className="App">
-      <header className="App-header">
+      <div className="App-header">
         <img alt='logo' id="app-logo" src="limehome_logo.png" />
-      </header>
+        <div className='app-links'>
+          <div>
+            <input 
+              value={searchText} 
+              type='text' 
+              className='search' 
+              name='search' 
+              placeholder='Search by description/name' 
+              onChange={onChangeSearch} 
+            />
+            <button style={{
+              marginLeft: '5px'
+            }} onClick={() => setSearchText('')}>Reset</button>
+          </div>
+
+        </div>
+      </div>
       <div className="App-body row">
         {!properties && (
           <div id='loader'>
             <img alt='Loader' src='loading.gif' />
           </div>
         )}
-        {properties?.map((data) => {
+        {filteredProperties?.map((data) => {
           const favIndex = favourites.indexOf(data.id)
           return (
             <div key={data.id} className="col-xs-12 col-sm-6 col-md-4 col-lg-3">
@@ -97,7 +140,7 @@ function App() {
                     title={favIndex !== -1 ? 'Remove from Favourites' : 'Add to Favourites'}
                     className="rating-img"
                     src={favIndex !== -1 ? "rating.png" : "rating_blank.png"}
-                    onClick={(e) => onClickToggleFav(data.id, favIndex)}
+                    onClick={(e) => onClickToggleFav(data.id, data.name, favIndex)}
                     alt='favourite'
                   />
                 </div>
@@ -111,3 +154,11 @@ function App() {
 }
 
 export default App;
+
+
+String.prototype.capitalize = function () {
+  return this.replace(/(^|\s)([a-z])/g,
+    function (m, p1, p2) {
+      return p1 + p2.toUpperCase();
+    });
+};
