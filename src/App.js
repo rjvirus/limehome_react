@@ -95,7 +95,7 @@ function App() {
               type='text' 
               className='search' 
               name='search' 
-              placeholder='Search by description/name' 
+              placeholder='Search by name / city' 
               onChange={onChangeSearch} 
             />
             <button style={{
@@ -110,6 +110,9 @@ function App() {
           <div id='loader'>
             <img alt='Loader' src='loading.gif' />
           </div>
+        )}
+        {properties?.length && !filteredProperties.length && (
+          <p>No properties found</p>
         )}
         {filteredProperties?.map((data) => {
           const favIndex = favourites.indexOf(data.id)
