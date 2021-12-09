@@ -68,11 +68,13 @@ function App() {
     <div className="App">
       <div className="App-header">
         <img alt='logo' id="app-logo" src="limehome_logo.png" />
-        <div>
-          <span style={{ fontSize: '12px', marginRight: '5px' }}>{currentPage} of {totalPage.current}</span>
-          <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>{'< Previous'}</button>
-          <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPage.current || totalPage.current === 0}>{'Next >'}</button>
-        </div>
+        {!searchText && (
+          <div className='pagination'>
+            <span style={{ fontSize: '12px', marginRight: '5px' }}>{currentPage} of {totalPage.current}</span>
+            <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>{'< Previous'}</button>
+            <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPage.current || totalPage.current === 0}>{'Next >'}</button>
+          </div>
+        )}
         <div className='app-search'>
           <input
             value={searchText}
@@ -91,7 +93,7 @@ function App() {
         className="App-body"
       >
         <Loader show={!properties} />
-        {properties?.length && filteredProperties.length == 0 && (
+        {properties?.length && !!searchText.length && filteredProperties.length == 0 && (
           <p>No properties found</p>
         )}
         <div className="row">
