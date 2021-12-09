@@ -55,26 +55,25 @@ export default function ImageViewer(props) {
 	}
 
 	return (
-		<div className='image-box'>
+		<div className='image-viewer'>
 			{isLoading ? (
 				<Loader show fill />
 			) : (
 				<img
-					className="header-img"
 					src={localImages[activeIndex]}
 					alt='Property Images'
 				/>
 			)}
 			<button
 				id='left'
-				className='action'
+				className='overlay-btn'
 				title='Show previous image'
 				onClick={(e) => onClickChange('prev')}
 			>
 				<img alt='Prev' src='arrow.png' />
 			</button>
 			<button
-				className='action'
+				className='overlay-btn'
 				title='Show next image'
 				id='right'
 				onClick={(e) => onClickChange('next')}

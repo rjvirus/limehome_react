@@ -5,6 +5,7 @@ import Card from './components/Card';
 import Pagination from './components/Pagination';
 import Logo from './components/Logo';
 import SearchBox from './components/SearchBox';
+import './components/index.css'
 
 const pageLimit = 16;
 
