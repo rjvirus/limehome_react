@@ -87,6 +87,11 @@
   color: #ffffff;
 }
 
+.app-card .action img {
+  height: 20px;
+  width: 10px;
+}
+
 .app-card #left {
   left: 0px;
   border-right: 1px solid #5a5a5a50;

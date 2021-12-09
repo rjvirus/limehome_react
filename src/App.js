@@ -17,6 +17,7 @@ function App(props) {
   const [searchText, setSearchText] = useState('');
   const [totalPage, setTotalPage] = useState(1);
   const [openSnackbar, closeSnackbar] = useSnackbar();
+  const notFound = properties?.length && !!searchText.length && filteredProperties.length == 0
 
   useEffect(() => {
     fetch("https://api.limehome.com/properties/v1/public/properties").then(res => {
@@ -80,19 +81,19 @@ function App(props) {
         className="App-body"
       >
         <Loader show={!properties} />
-        {properties?.length && !!searchText.length && filteredProperties.length == 0 && (
+        {notFound && (
           <p>No properties found</p>
         )}
         <div className="row">
           {filteredProperties?.map((data) => {
-            const favIndex = favourites.indexOf(data.id)
+            const indexInDB = favourites.indexOf(data.id)
             return (
               <Card 
                 key={data.id} 
                 {...data} 
-                selected={favIndex !== -1} 
-                position={favIndex} 
-                setFavourites={setFavourites} 
+                selected={indexInDB !== -1} 
+                position={indexInDB}
+                updateFavourites={setFavourites} 
               />
             )
           })}
