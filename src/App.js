@@ -2,6 +2,7 @@ import './App.css';
 import { useEffect, useState, useMemo } from 'react';
 import Loader from './components/Loader';
 import Card from './components/Card';
+import Cards from './components/Cards';
 import Pagination from './components/Pagination';
 import Logo from './components/Logo';
 import SearchBox from './components/SearchBox';
@@ -16,7 +17,7 @@ function App(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState('');
   const [totalPage, setTotalPage] = useState(1);
-  
+
   useEffect(() => {
     fetch("https://api.limehome.com/properties/v1/public/properties").then(res => {
       return res.json()
@@ -48,8 +49,8 @@ function App(props) {
       if (searchText.length > 0) {
         const updatedArrray = [];
         properties.forEach(t => {
-          if(searchText === 'show-fav') {
-            if(favourites.includes(t.id)) {
+          if (searchText === 'show-fav') {
+            if (favourites.includes(t.id)) {
               updatedArrray.push(t)
             }
           } else if (t.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()) || t.location.countryName.toLocaleLowerCase().includes(searchText.toLocaleLowerCase())) {
@@ -76,37 +77,21 @@ function App(props) {
     <div className="App">
       <div className="App-header">
         <Logo updatePage={setCurrentPage} />
-        
         <SearchBox text={searchText} onChange={(txt) => setSearchText(txt)} />
-
         <Pagination disabled={!!searchText} page={currentPage} total={totalPage} updatePage={setCurrentPage} />
       </div>
-      <div
-        className="App-body"
-      >
+      <div className="App-body">
         <Loader show={!properties} />
-        {notFound && (
-          <p>No properties found</p>
-        )}
-        <div className="row">
-          {filteredProperties?.map((data) => {
-            const indexInDB = favourites.indexOf(data.id)
-            return (
-              <Card 
-                key={data.id}
-                selected={indexInDB !== -1} 
-                position={indexInDB}
-                updateFavourites={setFavourites}
-                {...data} 
-              />
-            )
-          })}
-        </div>
+        {notFound && <p>No properties found</p>}
+        <Cards
+          properties={filteredProperties}
+          setFavourites={setFavourites}
+          favourites={favourites}
+        />
       </div>
     </div>
   );
 }
 
 export default App;
-
 
