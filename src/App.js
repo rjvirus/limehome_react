@@ -1,7 +1,8 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import LazyLoad from "react-lazy-load";
-import { useSnackbar } from 'react-simple-snackbar'
+import { useSnackbar } from 'react-simple-snackbar';
+import Loader from './components/Loader';
+import ImageViewer from './components/ImageViewer';
 
 function App() {
 
@@ -88,30 +89,23 @@ function App() {
     <div className="App">
       <div className="App-header">
         <img alt='logo' id="app-logo" src="limehome_logo.png" />
-        <div className='app-links'>
-          <div>
-            <input 
-              value={searchText} 
-              type='text' 
-              className='search' 
-              name='search' 
-              placeholder='Search by name / city' 
-              onChange={onChangeSearch} 
-            />
-            <button style={{
-              marginLeft: '5px'
-            }} onClick={() => setSearchText('')}>Reset</button>
-          </div>
-
+        <div className='app-search'>
+          <input
+            value={searchText}
+            type='text'
+            className='search'
+            name='search'
+            placeholder='Search by name / country'
+            onChange={onChangeSearch}
+          />
+          <button style={{
+            marginLeft: '5px'
+          }} onClick={() => setSearchText('')}>Reset</button>
         </div>
       </div>
       <div className="App-body row">
-        {!properties && (
-          <div id='loader'>
-            <img alt='Loader' src='loading.gif' />
-          </div>
-        )}
-        {properties?.length && !filteredProperties.length && (
+        <Loader show={!properties} />
+        {properties?.length && filteredProperties.length == 0 && (
           <p>No properties found</p>
         )}
         {filteredProperties?.map((data) => {
@@ -119,21 +113,7 @@ function App() {
           return (
             <div key={data.id} className="col-xs-12 col-sm-6 col-md-4 col-lg-3">
               <div className="box app-card">
-                <div className='header'>
-                  <LazyLoad height={250}>
-                    <img
-                      className="header-img"
-                      src={data.images[0].url}
-                      alt='Property Images'
-                    />
-                  </LazyLoad>
-                  <button className='action' title='Show previous image' id='left'>
-                    <img alt='Prev' src='arrow.png' height="20px" width="10px" />
-                  </button>
-                  <button className='action' title='Show next image' id='right'>
-                    <img alt='Next' src='arrow.png' height="20px" width="20px" />
-                  </button>
-                </div>
+                <ImageViewer images={data.images} />
                 <div className="body">
                   <div>
                     <p className='name'>{data.name}</p>
