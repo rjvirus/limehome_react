@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Loader from "./Loader";
 import Compressor from 'compressorjs';
 
@@ -60,21 +60,18 @@ export default function ImageViewer(props) {
 			{localImages[activeIndex] == undefined ? (
 				<Loader show fill />
 			) : (
-				<Fragment>
-					<img
-						className="header-img"
-						src={localImages[activeIndex]}
-						alt='Property Images'
-					/>
-					<button className='action' title='Show previous image' id='left' onClick={(e) => onClickChange('prev')}>
-						<img alt='Prev' src='arrow.png' height="20px" width="10px" />
-					</button>
-					<button className='action' title='Show next image' id='right' onClick={(e) => onClickChange('next')}>
-						<img alt='Next' src='arrow.png' height="20px" width="20px" />
-					</button>
-				</Fragment>
+				<img
+					className="header-img"
+					src={localImages[activeIndex]}
+					alt='Property Images'
+				/>
 			)}
-
+			<button className='action' title='Show previous image' id='left' onClick={(e) => onClickChange('prev')}>
+				<img alt='Prev' src='arrow.png' height="20px" width="10px" />
+			</button>
+			<button className='action' title='Show next image' id='right' onClick={(e) => onClickChange('next')}>
+				<img alt='Next' src='arrow.png' height="20px" width="20px" />
+			</button>
 		</div>
 	)
 }

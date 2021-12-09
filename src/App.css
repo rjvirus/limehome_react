@@ -2,9 +2,23 @@
   background-color: #F7F1E9;
 }
 
+.App button {
+  padding: 6px;
+  background-color: #dcdfbd;
+  color: rgb(75, 75, 77);
+  border: 1px solid brown;
+  border-radius: 3px;
+}
+
+.App button:hover {
+  background-color: #c0c2a4dc;
+  cursor: pointer;
+}
+
 #app-logo {
   height: 24px;
   width: 138px;
+  cursor: pointer;
 }
 
 #loader {
@@ -113,6 +127,7 @@
 .search {
   width: 200px;
   margin-bottom: 0;
+  padding: 6px;
 }
 
 .app-card .city {

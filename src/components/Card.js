@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSnackbar } from 'react-simple-snackbar';
 import ImageViewer from './ImageViewer';
 
@@ -6,14 +5,13 @@ export default function Card(props) {
 	const { id, images, name, location, position, selected, setFavourites } = props;
 	const [openSnackbar, closeSnackbar] = useSnackbar();
 
-	function onClickToggleFav(propertyId, name, favIndex) {
+	function onClickToggleFav(propertyId, name) {
     document.body.style.cursor = 'wait';
-    const requestOptions = {
+    fetch("http://localhost:5001/limehome-95934/us-central1/app/api/favourites", {
       method: selected ? 'DELETE' : 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ propertyId })
-    };
-    fetch("http://localhost:5001/limehome-95934/us-central1/app/api/favourites", requestOptions).then(res => {
+    }).then(res => {
       return res.json();
     }).then(d => {
       if (d.success) {
@@ -29,6 +27,7 @@ export default function Card(props) {
       }
     }).catch((e) => {
       console.error(e)
+      openSnackbar("Failed to fetch favourites");
     }).finally(() => {
       document.body.style.cursor = 'default';
     });
@@ -47,7 +46,7 @@ export default function Card(props) {
 						title={selected ? 'Remove from Favourites' : 'Add to Favourites'}
 						className="rating-img"
 						src={selected ? "rating.png" : "rating_blank.png"}
-						onClick={(e) => onClickToggleFav(id, name, position)}
+						onClick={(e) => onClickToggleFav(id, name)}
 						alt='favourite'
 					/>
 				</div>

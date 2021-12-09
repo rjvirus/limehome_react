@@ -2,16 +2,21 @@ import './App.css';
 import { useEffect, useState, useRef, useMemo } from 'react';
 import Loader from './components/Loader';
 import Card from './components/Card';
+import { useSnackbar } from 'react-simple-snackbar';
+import Pagination from './components/Pagination';
+import Logo from './components/Logo';
+import SearchBox from './components/SearchBox';
 
 const pageLimit = 16;
 
-function App() {
+function App(props) {
 
   const [properties, setProperties] = useState(undefined);
   const [favourites, setFavourites] = useState([]);
-  const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPage = useRef(0);
+  const [searchText, setSearchText] = useState('');
+  const [totalPage, setTotalPage] = useState(1);
+  const [openSnackbar, closeSnackbar] = useSnackbar();
 
   useEffect(() => {
     fetch("https://api.limehome.com/properties/v1/public/properties").then(res => {
@@ -19,7 +24,7 @@ function App() {
     }).then(data => {
       if (data.success) {
         setProperties(data.payload);
-        totalPage.current = Math.ceil(data.payload.length / 16);
+        setTotalPage(Math.ceil(data.payload.length / 16));
       } else {
         setProperties(null);
       }
@@ -32,12 +37,10 @@ function App() {
       return res.json();
     }).then(d => {
       return setFavourites(d.data);
+    }).catch((e) => {
+      openSnackbar(e.msg ?? "Failed to fetch favourites")
     });
   }, []);
-
-  function onChangeSearch(event) {
-    setSearchText(event.target.value);
-  }
 
   const filteredProperties = useMemo(() => {
     let invArr = properties ?? [];
@@ -67,27 +70,11 @@ function App() {
   return (
     <div className="App">
       <div className="App-header">
-        <img alt='logo' id="app-logo" src="limehome_logo.png" />
+        <Logo updatePage={setCurrentPage} />
         {!searchText && (
-          <div className='pagination'>
-            <span style={{ fontSize: '12px', marginRight: '5px' }}>{currentPage} of {totalPage.current}</span>
-            <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>{'< Previous'}</button>
-            <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPage.current || totalPage.current === 0}>{'Next >'}</button>
-          </div>
+          <Pagination page={currentPage} total={totalPage} updatePage={setCurrentPage} />
         )}
-        <div className='app-search'>
-          <input
-            value={searchText}
-            type='text'
-            className='search'
-            name='search'
-            placeholder='Search by name / country'
-            onChange={onChangeSearch}
-          />
-          <button style={{
-            marginLeft: '5px'
-          }} onClick={() => setSearchText('')}>Reset</button>
-        </div>
+        <SearchBox text={searchText} onChange={(txt) => setSearchText(txt)} />
       </div>
       <div
         className="App-body"
@@ -100,7 +87,13 @@ function App() {
           {filteredProperties?.map((data) => {
             const favIndex = favourites.indexOf(data.id)
             return (
-              <Card {...data} position={favIndex} setFavourites />
+              <Card 
+                key={data.id} 
+                {...data} 
+                selected={favIndex !== -1} 
+                position={favIndex} 
+                setFavourites={setFavourites} 
+              />
             )
           })}
         </div>
