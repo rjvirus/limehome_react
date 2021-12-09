@@ -8,6 +8,8 @@ import SearchBox from './components/SearchBox';
 import './components/index.css'
 
 const pageLimit = 16;
+const LIMEHOME_API = "https://api.limehome.com/properties/v1/public/properties";
+const LOCAL_API = "http://localhost:5001/limehome-95934/us-central1/app/api";
 
 function App(props) {
 
@@ -19,7 +21,7 @@ function App(props) {
  
   useEffect(() => {
     //fetch properties from the public API provided by limehome
-    fetch("https://api.limehome.com/properties/v1/public/properties").then(res => {
+    fetch(LIMEHOME_API).then(res => {
       return res.json()
     }).then(data => {
       if (data.success) {
@@ -36,7 +38,7 @@ function App(props) {
 
 
     //fetch saved favourite properties item from the local runnning REST API
-    fetch("http://localhost:5001/limehome-95934/us-central1/app/api/favourites", {
+    fetch(LOCAL_API+"/favourites", {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     }).then(res => {
