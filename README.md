@@ -19,3 +19,6 @@ After downloading and extracting the zip files, please run npm install to downlo
 npm start and wait for the project to load
 Runs the app in the development mode.
 Open http://localhost:3000 to view it in the browser.
+
+
+![image](https://user-images.githubusercontent.com/21171567/145476609-b2ad8959-6a9f-43d0-ba07-8c6a7d872892.png)
