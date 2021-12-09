@@ -18,7 +18,7 @@ function App(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const [searchText, setSearchText] = useState('');
- 
+
   useEffect(() => {
     //fetch properties from the public API provided by limehome
     fetch(LIMEHOME_API).then(res => {
@@ -38,7 +38,7 @@ function App(props) {
 
 
     //fetch saved favourite properties item from the local runnning REST API
-    fetch(LOCAL_API+"/favourites", {
+    fetch(LOCAL_API + "/favourites", {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     }).then(res => {
@@ -53,7 +53,7 @@ function App(props) {
 
   const filteredProperties = useMemo(() => {
     let updatedArr = properties ?? [];
-
+    scrollToTop();
     if (properties?.length) {
       if (searchText.length > 0) {
         const updatedArrray = [];
@@ -105,4 +105,11 @@ function App(props) {
 }
 
 export default App;
+
+function scrollToTop() {
+  var myDiv = document.getElementsByClassName('App-body');
+    if (myDiv[0]) {
+      myDiv[0].scrollTop = 0;
+    }
+}
 
