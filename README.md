@@ -25,6 +25,7 @@ Some features :-
 2. Mark items as favourites
 3. Searching possible for a particular property by name or country
 4. Multiple Image Viewer with caching also implemented for better User Experience
+5. Pagination to navigate through the properties
 
 
 ![image](https://user-images.githubusercontent.com/21171567/145476609-b2ad8959-6a9f-43d0-ba07-8c6a7d872892.png)
