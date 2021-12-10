@@ -1,5 +1,5 @@
 export default function SearchBox(props) {
-	const { text, onChange } = props;
+	const { text, onChange, favCount } = props;
 
 	return (
 		<div className='search-box items'>
@@ -24,7 +24,8 @@ export default function SearchBox(props) {
 				onClick={() => onChange('show-fav')}
 				disabled={text === 'show-fav'}
 			>
-				Show Favourites
+				Show Favourites 
+				{!!favCount && <span class="badge">{favCount}</span>}
 			</button>
 		</div>
 	)

@@ -96,8 +96,13 @@ function App(props) {
     <div className="App">
       <div className={appHeaderClassName}>
         <Logo updatePage={setCurrentPage} />
-        <SearchBox text={searchText} onChange={(txt) => setSearchText(txt)} />
-        <Pagination disabled={!!searchText} page={currentPage} total={totalPage} updatePage={setCurrentPage} />
+        <SearchBox favCount={favourites.length} text={searchText} onChange={(txt) => setSearchText(txt)} />
+        <Pagination 
+          disabled={!!searchText} 
+          page={currentPage} 
+          total={totalPage} 
+          updatePage={setCurrentPage}
+        />
       </div>
       <div className="App-body">
         <Loader show={properties === undefined} />
@@ -122,5 +127,5 @@ function scrollToTop() {
   }
 }
 
-const isFavToggled = (s) => s !== "show-fav";
+const isFavToggled = (s) => (s === "show-fav");
 

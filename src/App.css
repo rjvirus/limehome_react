@@ -10,6 +10,19 @@
   border-radius: 3px;
   margin-left: 5px;
   font-family: monospace;
+  position: relative;
+}
+
+.app-btn .badge {
+  position: absolute;
+  top: -13px;
+  right: -14px;
+  padding: 2px 7px;
+  border-radius: 50%;
+  background: #e1b0b0cc;
+  color: #c32121;
+  border: 1px solid #00000057;
+  font-weight: 600;
 }
 
 .app-btn:disabled {
