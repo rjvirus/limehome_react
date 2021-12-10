@@ -2,7 +2,7 @@
   background-color: #F7F1E9;
 }
 
-.App button {
+.app-btn {
   padding: 6px;
   background-color: #dcdfbd;
   color: rgb(75, 75, 77);
@@ -11,17 +11,18 @@
   margin-left: 5px;
 }
 
-.App button:disabled {
+.app-btn:disabled {
   background-color: #f8dfdf;
   color: rgb(202, 187, 187);
 }
 
-.App button:disabled:hover {
+.app-btn:disabled:hover {
   background-color: #f8dfdf;
   color: rgb(202, 187, 187);
+  cursor: not-allowed;
 }
 
-.App button:hover {
+.app-btn:hover {
   background-color: #c0c2a4dc;
   cursor: pointer;
 }
