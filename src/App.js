@@ -61,7 +61,6 @@ function App(props) {
 
   const filteredProperties = useMemo(() => {
     let updatedArr = properties ?? [];
-    scrollToTop();
     if (properties?.length) {
       if (searchText.length > 0) {
         const updatedArrray = [];
@@ -101,7 +100,10 @@ function App(props) {
           disabled={!!searchText} 
           page={currentPage} 
           total={totalPage} 
-          updatePage={setCurrentPage}
+          updatePage={(d) => {
+            scrollToTop();
+            setCurrentPage(d);
+          }}
         />
       </div>
       <div className="App-body">
