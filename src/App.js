@@ -18,11 +18,14 @@ function App(props) {
   const [totalPage, setTotalPage] = useState(1);
   const [searchText, setSearchText] = useState('');
   const windowSize = useWindowSize();
-  const appHeaderClassName = classNames("App-header", {
+  const appHeaderClassName = classNames("app-header", {
     'small': windowSize === 'sm',
     'medium': windowSize === 'md',
     'large': windowSize === 'lg' || windowSize === 'xlg'
   });
+  const appBodyClassName = classNames("app-body", {
+    "medium": windowSize === 'sm' || windowSize === 'md'
+  })
   const NoFavMsg = () => <p>No properties marked as favourite.</p>;
   const GenericMsg = () => <p>No properties match the searched term. Please reset and try again.</p>;
   
@@ -100,13 +103,10 @@ function App(props) {
           disabled={!!searchText} 
           page={currentPage} 
           total={totalPage} 
-          updatePage={(d) => {
-            scrollToTop();
-            setCurrentPage(d);
-          }}
+          updatePage={setCurrentPage}
         />
       </div>
-      <div className="App-body">
+      <div className={appBodyClassName}>
         <Loader show={properties === undefined} />
         {properties === null && <p>Please check your internet</p>}
         {notFound && (isFavToggled(searchText) ? <NoFavMsg /> : <GenericMsg />)}
@@ -122,8 +122,8 @@ function App(props) {
 
 export default App;
 
-function scrollToTop() {
-  var myDiv = document.getElementsByClassName('App-body');
+export function scrollToTop() {
+  var myDiv = document.getElementsByClassName('app-body');
   if (myDiv[0]) {
     myDiv[0].scrollTop = 0;
   }
