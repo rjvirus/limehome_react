@@ -11,12 +11,8 @@ export default function SearchBox(props) {
 				placeholder='Search by name / country'
 				onChange={(event) => onChange(event.target.value)}
 			/>
-			<button style={{
-				marginLeft: '5px'
-			}} onClick={() => onChange('')}>Reset</button>
-			<button style={{
-				marginLeft: '5px'
-			}} onClick={() => onChange('show-fav')}>Show Favourites</button>
+			<button onClick={() => onChange('')}>Reset</button>
+			<button onClick={() => onChange('show-fav')}>Show Favourites</button>
 		</div>
 	)
 }

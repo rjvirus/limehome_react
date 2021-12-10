@@ -8,7 +8,7 @@ export default function Pagination(props) {
     return show ? (
         <div className='pagination'>
             <span className='detail'>{localPage} of {localTotal}</span>
-            <button style={{ marginRight: '3px'}} disabled={localPage === 1} onClick={() => updatePage(localPage - 1)}>
+            <button disabled={localPage === 1} onClick={() => updatePage(localPage - 1)}>
                 {'< Prev'}
             </button>
             <button onClick={() => updatePage(localPage + 1)} disabled={localPage === localTotal || localTotal === 0}>

@@ -8,6 +8,7 @@
   color: rgb(75, 75, 77);
   border: 1px solid brown;
   border-radius: 3px;
+  margin-left: 5px;
 }
 
 .App button:hover {
