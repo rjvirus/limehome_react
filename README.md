@@ -30,12 +30,12 @@ Some features :-
 
 Small Screen
 
-![image](https://user-images.githubusercontent.com/21171567/145595680-a16e7537-640a-43e3-ba3f-496fa33e914c.png)
+![image](https://user-images.githubusercontent.com/21171567/145599007-58ad6ce8-6a77-42e7-82b7-2b4933b1891a.png)
 
 Medium Screen
 
-![image](https://user-images.githubusercontent.com/21171567/145595779-a5b6520f-c9fe-469b-b66e-ad1bb90f94c4.png)
+![image](https://user-images.githubusercontent.com/21171567/145599147-abca7bd9-7a86-42b0-9f2c-8b596291fbbd.png)
 
 Large Screen
 
-![image](https://user-images.githubusercontent.com/21171567/145476609-b2ad8959-6a9f-43d0-ba07-8c6a7d872892.png)
+![image](https://user-images.githubusercontent.com/21171567/145599190-0e8ee5c5-47d4-413f-bac8-3b924b77d8bf.png)
