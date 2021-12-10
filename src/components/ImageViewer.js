@@ -13,6 +13,9 @@ export default function ImageViewer(props) {
 	useEffect(() => {
 		let isActive = true;
 		var xhr = new XMLHttpRequest();
+		/* creating an xhr request to download blob from url
+		then compressing the blob and caching it in state for each property until pages are changed
+		*/
 		if (activeIndex !== undefined && localImages[activeIndex] === undefined) {
 			xhr.open('GET', images[activeIndex].url, true);
 			xhr.responseType = 'arraybuffer';

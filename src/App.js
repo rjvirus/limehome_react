@@ -15,7 +15,6 @@ function App(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const [searchText, setSearchText] = useState('');
-  const [toggleFav, setToggleFav] = useState(false);
 
   useEffect(() => {
     //fetch properties from the public API provided by limehome
