@@ -21,7 +21,7 @@ Runs the app in the development mode.
 Open http://localhost:3000 to view it in the browser.
 
 Some features :-
-1. Fully responsive UI
+1. Fully responsive and interactive UI
 2. Mark items as favourites
 3. Searching possible for a particular property by name or country
 4. Multiple Image Viewer with caching and compression using compressor-js implemented for better User Experience which was by far the most difficult task in this challenge.
