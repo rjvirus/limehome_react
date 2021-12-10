@@ -20,5 +20,10 @@ npm start and wait for the project to load
 Runs the app in the development mode.
 Open http://localhost:3000 to view it in the browser.
 
+Some features :-
+1. Fully responsive UI
+2. Mark items as favourite
+3. Multiple Image viewer with caching also implemented for better User Experience
+
 
 ![image](https://user-images.githubusercontent.com/21171567/145476609-b2ad8959-6a9f-43d0-ba07-8c6a7d872892.png)
