@@ -22,6 +22,10 @@
     box-shadow: 0px 0px 7px -3px #000000;
   }
 
+  .app-card:hover {
+    box-shadow: 0px 0px 12px -3px #000000
+  }
+
   .app-card .body {
     height: 75px;
     display: flex;
@@ -69,7 +73,7 @@
   }
 
   .app-card .overlay-btn:hover {
-    background-color: #0000005b;
+    background-color: #00000036;
     color: #ffffff;
   }
   
@@ -79,12 +83,12 @@
   }
   
   .app-card #overlay-btn-left {
-    left: 0px;
+    left: -1px;
     border-right: 1px solid #5a5a5a50;
   }
   
   .app-card #overlay-btn-right {
-    right: 0px;
+    right: -1px;
     border-left: 1px solid #5a5a5a50;
   }
   
