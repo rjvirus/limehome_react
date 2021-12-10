@@ -15,6 +15,7 @@ export default function SearchBox(props) {
 			<button
 				title="Click on Reset to Toggle Off Favourite"
 				onClick={() => onChange('show-fav')}
+				disabled={text === 'show-fav'}
 			>
 				Show Favourites
 			</button>
