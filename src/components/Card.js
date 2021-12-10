@@ -1,7 +1,7 @@
 import { useSnackbar } from 'react-simple-snackbar';
 import ImageViewer from './ImageViewer';
+import { LOCAL_API } from '../config.json';
 
-const LOCAL_API = "http://localhost:5001/limehome-95934/us-central1/app/api";
 export default function Card(props) {
   const { id, images, name, location, position, selected, updateFavourites } = props;
   const [openSnackbar] = useSnackbar();

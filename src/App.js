@@ -5,11 +5,8 @@ import Cards from './components/Cards';
 import Pagination from './components/Pagination';
 import Logo from './components/Logo';
 import SearchBox from './components/SearchBox';
+import { LIMEHOME_API, LOCAL_API, PAGE_LIMIT } from './config.json';
 import './components/index.css'
-
-const pageLimit = 16;
-const LIMEHOME_API = "https://api.limehome.com/properties/v1/public/properties";
-const LOCAL_API = "http://localhost:5001/limehome-95934/us-central1/app/api";
 
 function App(props) {
 
@@ -70,9 +67,9 @@ function App(props) {
         updatedArr = updatedArrray;
       } else {
         updatedArr = properties;
-        const updated = properties.slice((currentPage - 1) * pageLimit, currentPage * pageLimit);
+        const updated = properties.slice((currentPage - 1) * PAGE_LIMIT, currentPage * PAGE_LIMIT);
         if (!updated.length) {
-          setCurrentPage(totalPage.current);
+          setCurrentPage(totalPage);
         }
         updatedArr = updated;
       }

@@ -1,0 +1,5 @@
+{
+    "LIMEHOME_API": "https://api.limehome.com/properties/v1/public/properties",
+    "LOCAL_API": "http://localhost:5001/limehome-95934/us-central1/app/api",
+    "PAGE_LIMIT": 16
+}
