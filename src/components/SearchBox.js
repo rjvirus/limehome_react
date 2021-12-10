@@ -12,7 +12,12 @@ export default function SearchBox(props) {
 				onChange={(event) => onChange(event.target.value)}
 			/>
 			<button onClick={() => onChange('')}>Reset</button>
-			<button onClick={() => onChange('show-fav')}>Show Favourites</button>
+			<button
+				title="Click on Reset to Toggle Off Favourite"
+				onClick={() => onChange('show-fav')}
+			>
+				Show Favourites
+			</button>
 		</div>
 	)
 }
