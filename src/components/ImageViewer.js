@@ -82,6 +82,7 @@ export default function ImageViewer(props) {
 			<button
 				id='overlay-btn-left'
 				className='overlay-btn'
+				disabled={(activeIndex-1) < 0}
 				title='Show previous image'
 				onClick={(e) => onClickChange('prev')}
 			>
