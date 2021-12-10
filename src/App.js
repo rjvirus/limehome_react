@@ -17,7 +17,6 @@ function App(props) {
   const [searchText, setSearchText] = useState('');
   const NoFavMsg = () => <p>No properties marked as favourite.</p>;
   const GenericMsg = () => <p>No properties match the searched term. Please reset and try again.</p>;
-  const notFound = properties?.length && !!searchText.length && filteredProperties.length === 0;
 
   useEffect(() => {
     //fetch properties from the public API provided by limehome
@@ -80,6 +79,8 @@ function App(props) {
 
     return updatedArr;
   }, [searchText, properties, currentPage, totalPage, favourites]);
+
+  const notFound = properties?.length && !!searchText.length && filteredProperties.length === 0;
 
   
   return (
