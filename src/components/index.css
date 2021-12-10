@@ -32,6 +32,7 @@
     display: flex;
     justify-content: space-between;
     padding: 15px;
+    border-top: 1px solid #5757584d;
   }
   
   .app-card .name {
