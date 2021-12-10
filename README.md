@@ -28,5 +28,11 @@ Some features :-
 5. Pagination to navigate through the properties
 6. Due to time constraints, pageLimit added in config.json (configurable) and not implemented in UI, which is default to 16 per page.
 
+Small Screen
+![image](https://user-images.githubusercontent.com/21171567/145595680-a16e7537-640a-43e3-ba3f-496fa33e914c.png)
 
+Medium Screen
+![image](https://user-images.githubusercontent.com/21171567/145595779-a5b6520f-c9fe-469b-b66e-ad1bb90f94c4.png)
+
+Large Screen
 ![image](https://user-images.githubusercontent.com/21171567/145476609-b2ad8959-6a9f-43d0-ba07-8c6a7d872892.png)
