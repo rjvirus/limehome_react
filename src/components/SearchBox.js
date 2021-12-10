@@ -2,7 +2,7 @@ export default function SearchBox(props) {
 	const { text, onChange } = props;
 
 	return (
-		<div className='app-search'>
+		<div className='search-box items'>
 			<input
 				value={text}
 				type='text'

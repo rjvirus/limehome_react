@@ -123,6 +123,10 @@
 
   /* Pagination */
 
+  .pagination {
+    width: max-content;
+  }
+  
   .pagination .detail {
     font-size: 14px;
     margin-right: 10px;

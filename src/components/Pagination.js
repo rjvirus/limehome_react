@@ -6,7 +6,7 @@ export default function Pagination(props) {
 	const localTotal = disabled ? 1 : total;
 
 	return show ? (
-		<div className='pagination'>
+		<div className='pagination items'>
 			<span className='detail'>{localPage} of {localTotal}</span>
 			<button
 				className='app-btn'

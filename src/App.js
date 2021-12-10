@@ -7,6 +7,8 @@ import Logo from './components/Logo';
 import SearchBox from './components/SearchBox';
 import { LIMEHOME_API, LOCAL_API, PAGE_LIMIT } from './config.json';
 import './components/index.css'
+import useWindowSize from './hooks/useWindowSize';
+import classNames from 'classnames';
 
 function App(props) {
 
@@ -15,8 +17,15 @@ function App(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const [searchText, setSearchText] = useState('');
+  const windowSize = useWindowSize();
+  const appHeaderClassName = classNames("App-header", {
+    'small': windowSize === 'sm',
+    'medium': windowSize === 'md',
+    'large': windowSize === 'lg' || windowSize === 'xlg'
+  });
   const NoFavMsg = () => <p>No properties marked as favourite.</p>;
   const GenericMsg = () => <p>No properties match the searched term. Please reset and try again.</p>;
+  
 
   useEffect(() => {
     //fetch properties from the public API provided by limehome
@@ -82,10 +91,10 @@ function App(props) {
 
   const notFound = properties?.length && !!searchText.length && filteredProperties.length === 0;
 
-  
+
   return (
     <div className="App">
-      <div className="App-header">
+      <div className={appHeaderClassName}>
         <Logo updatePage={setCurrentPage} />
         <SearchBox text={searchText} onChange={(txt) => setSearchText(txt)} />
         <Pagination disabled={!!searchText} page={currentPage} total={totalPage} updatePage={setCurrentPage} />
@@ -113,5 +122,5 @@ function scrollToTop() {
   }
 }
 
-const isFavToggled = (s) =>  s !== "show-fav";
+const isFavToggled = (s) => s !== "show-fav";
 
