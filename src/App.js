@@ -15,6 +15,9 @@ function App(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const [searchText, setSearchText] = useState('');
+  const NoFavMsg = () => <p>No properties marked as favourite.</p>;
+  const GenericMsg = () => <p>No properties match the searched term. Please reset and try again.</p>;
+  const notFound = properties?.length && !!searchText.length && filteredProperties.length === 0;
 
   useEffect(() => {
     //fetch properties from the public API provided by limehome
@@ -78,8 +81,7 @@ function App(props) {
     return updatedArr;
   }, [searchText, properties, currentPage, totalPage, favourites]);
 
-  const notFound = properties?.length && !!searchText.length && filteredProperties.length === 0;
-
+  
   return (
     <div className="App">
       <div className="App-header">
@@ -90,7 +92,7 @@ function App(props) {
       <div className="App-body">
         <Loader show={properties === undefined} />
         {properties === null && <p>Please check your internet</p>}
-        {notFound && <p>No properties found</p>}
+        {notFound && (searchText === "show-fav" ? <NoFavMsg /> : <GenericMsg />)}
         <Cards
           properties={filteredProperties}
           setFavourites={setFavourites}
@@ -105,8 +107,8 @@ export default App;
 
 function scrollToTop() {
   var myDiv = document.getElementsByClassName('App-body');
-    if (myDiv[0]) {
-      myDiv[0].scrollTop = 0;
-    }
+  if (myDiv[0]) {
+    myDiv[0].scrollTop = 0;
+  }
 }
 

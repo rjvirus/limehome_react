@@ -11,10 +11,16 @@ export default function SearchBox(props) {
 				placeholder='Search by name / country'
 				onChange={(event) => onChange(event.target.value)}
 			/>
-			<button className='app-btn' onClick={() => onChange('')}>Reset</button>
+			<button 
+				title="Click to reset search results" 
+				className='app-btn' 
+				onClick={() => onChange('')}
+			>
+				Reset
+			</button>
 			<button
 				className='app-btn'
-				title="Click on Reset to Toggle Off Favourite"
+				title="Click to show favourite"
 				onClick={() => onChange('show-fav')}
 				disabled={text === 'show-fav'}
 			>
