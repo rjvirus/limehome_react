@@ -92,6 +92,7 @@ export default function ImageViewer(props) {
 				id='overlay-btn-right'
 				className='overlay-btn'
 				title='Show next image'
+				disabled={(activeIndex+1) === localImages.length-1}
 				onClick={(e) => onClickChange('next')}
 			>
 				<img alt='Next' src='arrow.png' />

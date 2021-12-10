@@ -79,14 +79,9 @@
   }
 
   .app-card .overlay-btn:disabled {
-    background-color: #f8dfdf;
-    color: rgb(202, 187, 187);
-    cursor: not-allowed;
-  }
-
-  .app-card .overlay-btn:disabled {
     background-color: #00000036;
     color: #ffffff;
+    cursor: not-allowed;
   }
   
   .app-card .overlay-btn img {
