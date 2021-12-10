@@ -15,6 +15,7 @@ function App(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const [searchText, setSearchText] = useState('');
+  const toggleFav = searchText === "show-fav";
   const NoFavMsg = () => <p>No properties marked as favourite.</p>;
   const GenericMsg = () => <p>No properties match the searched term. Please reset and try again.</p>;
 
@@ -57,7 +58,7 @@ function App(props) {
       if (searchText.length > 0) {
         const updatedArrray = [];
         properties.forEach(t => {
-          if (searchText === 'show-fav') { //if show favourite button is activated
+          if (toggleFav) { //if show favourite button is activated
             if (favourites.includes(t.id)) {
               updatedArrray.push(t)
             }
@@ -93,7 +94,7 @@ function App(props) {
       <div className="App-body">
         <Loader show={properties === undefined} />
         {properties === null && <p>Please check your internet</p>}
-        {notFound && (searchText === "show-fav" ? <NoFavMsg /> : <GenericMsg />)}
+        {notFound && (toggleFav ? <NoFavMsg /> : <GenericMsg />)}
         <Cards
           properties={filteredProperties}
           setFavourites={setFavourites}
