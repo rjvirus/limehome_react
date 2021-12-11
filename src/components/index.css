@@ -46,7 +46,7 @@
     text-transform: capitalize;
   }
 
-  /* Multi Image Viewer */
+  /* Image Viewer */
   
   .card .image-viewer {
     position: relative;
@@ -58,9 +58,31 @@
     width: 100%;
     object-fit: cover;
   }
-  
-  /* Multi Image Viewer Overlay Button */
-  
+
+  .card .overlay-bottom-box {
+    color: #00000073;
+    overflow: hidden;
+    outline: none;
+    bottom: 5px;
+    background-color: transparent;
+    position: absolute;
+    background-repeat: no-repeat;
+    border: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .overlay-bottom-box .img-count {
+    border: 1px solid #00000030;
+    padding: 1px 6px;
+    border-radius: 6px;
+    font-size: 11px;
+    background-color: #e8e3dba1;
+    font-weight: 700;
+    color: #0000005e;
+  }
+
   .card .overlay-btn {
     height: 250px;
     color: #00000073;
