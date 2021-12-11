@@ -24,7 +24,7 @@ Some features :-
 1. Fully responsive and interactive UI
 2. Mark items as favourites
 3. Searching possible for a particular property by name or country
-4. Multiple Image Viewer with caching and compression using compressor-js implemented for better User Experience which was by far the most difficult task in this challenge.
+4. Custom Implemented Multiple Image Viewer with caching and compression using compressor-js for better User Experience as image size is very big and displaying it uses a lot of resource which results in laggy experience. This was by far the most difficult task in this challenge.
 5. Pagination to navigate through the properties
 6. Due to time constraints, pageLimit added in config.json (configurable) and not implemented in UI, which is default to 16 per page.
 
