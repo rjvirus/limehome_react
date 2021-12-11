@@ -81,6 +81,7 @@
     background-color: #e8e3dba1;
     font-weight: 700;
     color: #0000005e;
+    cursor: default;
   }
 
   .card .overlay-btn {

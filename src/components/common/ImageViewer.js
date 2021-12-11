@@ -82,7 +82,7 @@ export default function ImageViewer(props) {
 			<div
 				className='overlay-bottom-box'
 				disabled={(activeIndex-1) < 0}
-				title='Show previous image'
+				title='Number of images'
 				onClick={(e) => onClickChange('prev')}
 			>
 				<div className="img-count">{activeIndex+1} / {images?.length}</div>
