@@ -1,7 +1,7 @@
 import './App.css';
 import { useEffect, useState, useMemo } from 'react';
 import { LIMEHOME_API, LOCAL_API, PAGE_LIMIT } from './config.json';
-import './components/index.css';
+import './components/styles.css';
 import AppBody from './components/AppBody';
 import AppHeader from './components/AppHeader';
 
