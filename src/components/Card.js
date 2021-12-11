@@ -38,7 +38,7 @@ export default function Card(props) {
 
   return (
     <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3" key={id}>
-      <div className="box app-card">
+      <div className="box card">
         <ImageViewer images={images} />
         <div className="body">
           <div>

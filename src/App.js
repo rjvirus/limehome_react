@@ -62,6 +62,7 @@ function App(props) {
     });
   }, []);
 
+  //filters the property when search iniatiated or favourite toggled
   const filteredProperties = useMemo(() => {
     let updatedArr = properties ?? [];
     if (properties?.length) {
@@ -90,6 +91,7 @@ function App(props) {
 
     return updatedArr;
   }, [searchText, properties, currentPage, totalPage, favourites]);
+  //TODO: too many dependecnies, needs cleanup
 
   const notFound = properties?.length && !!searchText.length && filteredProperties.length === 0;
 

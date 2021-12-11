@@ -17,17 +17,17 @@
 
   /* CARD STYLES*/
   
-  .app-card {
+  .card {
     border: 1px solid gray;
     margin: 10px 0;
     box-shadow: 0px 0px 7px -3px #000000;
   }
 
-  .app-card:hover {
+  .card:hover {
     box-shadow: 0px 0px 12px -3px #000000
   }
 
-  .app-card .body {
+  .card .body {
     height: 75px;
     display: flex;
     justify-content: space-between;
@@ -35,25 +35,25 @@
     border-top: 1px solid #5757584d;
   }
   
-  .app-card .name {
+  .card .name {
     font-weight: 600;
     font-size: 16px;
     text-transform: capitalize;
   }
 
-  .app-card .city {
+  .card .city {
     font-size: 16px;
     text-transform: capitalize;
   }
 
   /* Multi Image Viewer */
   
-  .app-card .image-viewer {
+  .card .image-viewer {
     position: relative;
     height: 250px;
   }
 
-  .app-card .image-viewer img {
+  .card .image-viewer img {
     height: 250px;
     width: 100%;
     object-fit: cover;
@@ -61,7 +61,7 @@
   
   /* Multi Image Viewer Overlay Button */
   
-  .app-card .overlay-btn {
+  .card .overlay-btn {
     height: 250px;
     color: #00000073;
     cursor: pointer;
@@ -74,28 +74,28 @@
     border: 0;
   }
 
-  .app-card .overlay-btn:hover {
+  .card .overlay-btn:hover {
     background-color: #00000036;
     color: #ffffff;
   }
 
-  .app-card .overlay-btn:disabled {
+  .card .overlay-btn:disabled {
     background-color: #00000036;
     color: #ffffff;
     cursor: not-allowed;
   }
   
-  .app-card .overlay-btn img {
+  .card .overlay-btn img {
     height: 20px;
     width: 10px;
   }
   
-  .app-card #overlay-btn-left {
+  .card #overlay-btn-left {
     left: -1px;
     border-right: 1px solid #5a5a5a50;
   }
   
-  .app-card #overlay-btn-right {
+  .card #overlay-btn-right {
     right: -1px;
     border-left: 1px solid #5a5a5a50;
   }
