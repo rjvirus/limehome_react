@@ -1,5 +1,5 @@
 import React from 'react';
-import { scrollToTop } from '../App';
+import { scrollToTop } from '../../App';
 
 export default function Pagination(props) {
 	const { page, total, updatePage, show = true, disabled } = props;

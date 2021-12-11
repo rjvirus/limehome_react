@@ -1,34 +1,16 @@
 import './App.css';
 import { useEffect, useState, useMemo } from 'react';
-import Loader from './components/Loader';
-import Cards from './components/Cards';
-import Pagination from './components/Pagination';
-import Logo from './components/Logo';
-import SearchBox from './components/SearchBox';
 import { LIMEHOME_API, LOCAL_API, PAGE_LIMIT } from './config.json';
-import './components/index.css'
-import useWindowSize from './hooks/useWindowSize';
-import classNames from 'classnames';
+import './components/index.css';
+import AppBody from './components/AppBody';
+import AppHeader from './components/AppHeader';
 
 function App(props) {
-
   const [properties, setProperties] = useState(undefined);
   const [favourites, setFavourites] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const [searchText, setSearchText] = useState('');
-  const windowSize = useWindowSize();
-  const appHeaderClassName = classNames("app-header", {
-    'small': windowSize === 'sm',
-    'medium': windowSize === 'md',
-    'large': windowSize === 'lg' || windowSize === 'xlg'
-  });
-  const appBodyClassName = classNames("app-body", {
-    "medium": windowSize === 'sm' || windowSize === 'md'
-  })
-  const NoFavMsg = () => <p>No properties marked as favourite.</p>;
-  const GenericMsg = () => <p>No properties match the searched term. Please reset and try again.</p>;
-  
 
   useEffect(() => {
     //fetch properties from the public API provided by limehome
@@ -93,31 +75,24 @@ function App(props) {
   }, [searchText, properties, currentPage, totalPage, favourites]);
   //TODO: too many dependecnies, needs cleanup
 
-  const notFound = properties?.length && !!searchText.length && filteredProperties.length === 0;
-
-
   return (
     <div className="App">
-      <div className={appHeaderClassName}>
-        <Logo updatePage={setCurrentPage} />
-        <SearchBox favCount={favourites.length} text={searchText} onChange={(txt) => setSearchText(txt)} />
-        <Pagination 
-          disabled={!!searchText} 
-          page={currentPage} 
-          total={totalPage} 
-          updatePage={setCurrentPage}
-        />
-      </div>
-      <div className={appBodyClassName}>
-        <Loader show={properties === undefined} />
-        {properties === null && <p>Please check your internet</p>}
-        {notFound && (isFavToggled(searchText) ? <NoFavMsg /> : <GenericMsg />)}
-        <Cards
-          properties={filteredProperties}
-          setFavourites={setFavourites}
-          favourites={favourites}
-        />
-      </div>
+      <AppHeader
+        page={currentPage}
+        totalPage={totalPage}
+        searchText={searchText}
+        favCount={favourites.length}
+        setCurrentPage={setCurrentPage}
+        onChangeSearch={(txt) => setSearchText(txt)}
+      />
+      <AppBody 
+        properties={properties}
+        filteredProperties={filteredProperties}
+        setFavourites={setFavourites}
+        favourites={favourites}
+        isSearch={!!searchText}
+        isFavToggled={isFavToggled(searchText)}
+      />
     </div>
   );
 }
@@ -131,5 +106,5 @@ export function scrollToTop() {
   }
 }
 
-const isFavToggled = (s) => (s === "show-fav");
+export const isFavToggled = (s) => (s === "show-fav");
 

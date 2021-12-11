@@ -1,6 +1,6 @@
 import { useSnackbar } from 'react-simple-snackbar';
 import ImageViewer from './ImageViewer';
-import { LOCAL_API } from '../config.json';
+import { LOCAL_API } from '../../config.json';
 
 export default function Card(props) {
   const { id, images, name, location, position, selected, updateFavourites } = props;
