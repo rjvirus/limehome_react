@@ -85,13 +85,13 @@ function App(props) {
         setCurrentPage={setCurrentPage}
         onChangeSearch={(txt) => setSearchText(txt)}
       />
-      <AppBody 
+      <AppBody
+        isSearch={!!searchText}
+        isFavToggled={isFavToggled(searchText)}
+        favourites={favourites}
         properties={properties}
         filteredProperties={filteredProperties}
         setFavourites={setFavourites}
-        favourites={favourites}
-        isSearch={!!searchText}
-        isFavToggled={isFavToggled(searchText)}
       />
     </div>
   );
