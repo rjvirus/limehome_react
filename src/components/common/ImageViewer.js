@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import Loader from "./Loader";
 import Compressor from 'compressorjs';
+import DialogBox from "./Modal";
 
 export default function ImageViewer(props) {
 	const { images } = props;
 	const [localImages, setLocalImages] = useState(new Array(images.length).fill(undefined)); // initialize with nulls for caching
 	const [activeIndex, setActiveIndex] = useState(0);
+	const [isDialogOpen, setIsDialogOpen] = useState(false);
 	const isLoading = localImages[activeIndex] === undefined;
 	const hasError = localImages[activeIndex] === null;
 
-	
 	useEffect(() => {
 		let isActive = true;
 		var xhr = new XMLHttpRequest();
@@ -76,21 +77,23 @@ export default function ImageViewer(props) {
 			) : (
 				<img
 					src={localImages[activeIndex]}
+					title="Click to view a full size of the image"
 					alt='Property Images'
+					onClick={() => setIsDialogOpen(true)}
 				/>
 			)}
 			<div
 				className='overlay-bottom-box'
-				disabled={(activeIndex-1) < 0}
+				disabled={(activeIndex - 1) < 0}
 				title='Number of images'
 				onClick={(e) => onClickChange('prev')}
 			>
-				<div className="img-count">{activeIndex+1} / {images?.length}</div>
+				<div className="img-count">{activeIndex + 1} / {images?.length}</div>
 			</div>
 			<button
 				id='overlay-btn-left'
 				className='overlay-btn'
-				disabled={(activeIndex-1) < 0}
+				disabled={(activeIndex - 1) < 0}
 				title='Show previous image'
 				onClick={(e) => onClickChange('prev')}
 			>
@@ -100,11 +103,22 @@ export default function ImageViewer(props) {
 				id='overlay-btn-right'
 				className='overlay-btn'
 				title='Show next image'
-				disabled={(activeIndex+1) === localImages.length-1}
+				disabled={(activeIndex + 1) === localImages.length - 1}
 				onClick={(e) => onClickChange('next')}
 			>
 				<img alt='Next' src='arrow.png' />
 			</button>
+			<DialogBox
+				open={isDialogOpen}
+				onClose={() => setIsDialogOpen(false)}
+				header={(
+					<button title="Close Dialog box" id="dialog-close" className="app-btn" onClick={() => setIsDialogOpen(false)}>
+						X
+					</button>
+				)}
+			>
+				<img alt="Fullscreen view" src={images[activeIndex].url} className="full-img" height={"50%"} width={"50%"} />
+			</DialogBox>
 		</div>
 	)
 }

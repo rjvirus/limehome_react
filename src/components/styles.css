@@ -57,9 +57,22 @@
     height: 250px;
     width: 100%;
     object-fit: cover;
+    cursor: pointer;
   }
 
-  .card .overlay-bottom-box {
+  .modal-body .full-img {
+    height: 80vh;
+    width: 80vw;
+    object-fit: contain;
+  }
+
+  #dialog-close {
+    position: absolute;
+    right: 15px;
+    border-radius: 50%;
+  }
+
+  .image-viewer .overlay-bottom-box {
     color: #00000073;
     overflow: hidden;
     outline: none;
