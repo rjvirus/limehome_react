@@ -13,7 +13,8 @@ export default function SearchBox(props) {
 			/>
 			<button 
 				title="Click to reset search results" 
-				className='app-btn' 
+				className='app-btn'
+				disabled={!text}
 				onClick={() => onChange('')}
 			>
 				Reset
