@@ -40,3 +40,7 @@ Medium Screen
 Large Screen
 
 ![image](https://user-images.githubusercontent.com/21171567/145599190-0e8ee5c5-47d4-413f-bac8-3b924b77d8bf.png)
+
+Full Screen View
+![image](https://user-images.githubusercontent.com/21171567/145734536-fb69bd97-1536-4066-97f4-173a2aaeca8f.png)
+
