@@ -31,15 +31,15 @@ Some features :-
 
 Small Screen
 
-![image](https://user-images.githubusercontent.com/21171567/145599007-58ad6ce8-6a77-42e7-82b7-2b4933b1891a.png)
+![image](https://user-images.githubusercontent.com/21171567/145828888-5b8fe769-a10b-4743-a96e-f4be82124085.png)
 
 Medium Screen
 
-![image](https://user-images.githubusercontent.com/21171567/145599147-abca7bd9-7a86-42b0-9f2c-8b596291fbbd.png)
+![image](https://user-images.githubusercontent.com/21171567/145828964-740e2f0c-a3aa-45f3-ab26-3929a3d29639.png)
 
 Large Screen
 
-![image](https://user-images.githubusercontent.com/21171567/145599190-0e8ee5c5-47d4-413f-bac8-3b924b77d8bf.png)
+![image](https://user-images.githubusercontent.com/21171567/145829036-480cac23-09b5-467a-8db1-2188b394c76e.png)
 
 Full Screen View
 ![image](https://user-images.githubusercontent.com/21171567/145734536-fb69bd97-1536-4066-97f4-173a2aaeca8f.png)
