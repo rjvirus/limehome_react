@@ -14,9 +14,7 @@ function App(props) {
 
   useEffect(() => {
     //fetch properties from the public API provided by limehome
-    fetch(LIMEHOME_API).then(res => {
-      return res.json()
-    }).then(data => {
+    fetchLimehomeProperties().then((data) => {
       if (data.success) {
         setProperties(data.payload);
         setTotalPage(Math.ceil(data.payload.length / 16));
@@ -31,12 +29,7 @@ function App(props) {
 
 
     //fetch saved favourite properties item from the local runnning REST API
-    fetch(LOCAL_API + "/favourites", {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
-    }).then(res => {
-      return res.json();
-    }).then(d => {
+    fetchFavourites().then(d => {
       return setFavourites(d.data);
     }).catch((e) => {
       console.error(e.message);
@@ -80,11 +73,11 @@ function App(props) {
     <div className="App">
       <AppHeader
         page={currentPage}
+        setPage={setCurrentPage}
         totalPage={totalPage}
         searchText={searchText}
+        onSearch={setSearchText}
         favCount={favourites?.length}
-        setCurrentPage={setCurrentPage}
-        onChangeSearch={(txt) => setSearchText(txt)}
       />
       <AppBody
         isSearch={!!searchText}
@@ -99,6 +92,21 @@ function App(props) {
 }
 
 export default App;
+
+const fetchLimehomeProperties = () => {
+  return fetch(LIMEHOME_API).then(res => {
+    return res.json()
+  })
+}
+
+const fetchFavourites = () => {
+  return fetch(LOCAL_API + "/favourites", {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' }
+  }).then(res => {
+    return res.json();
+  })
+}
 
 export function scrollToTop() {
   var myDiv = document.getElementsByClassName('app-body');

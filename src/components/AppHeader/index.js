@@ -6,7 +6,7 @@ import Pagination from "./Pagination";
 import SearchBox from "./SearchBox";
 
 export default function AppHeader(props) {
-	const { setCurrentPage, favCount, searchText, onChangeSearch, page, totalPage } = props;
+	const { setPage, favCount, searchText, onSearch, page, totalPage } = props;
 	const windowSize = useWindowSize();
 	const appHeaderClassName = classNames("app-header", {
     'small': windowSize === 'sm',
@@ -16,13 +16,13 @@ export default function AppHeader(props) {
 
 	return (
 		<div className={appHeaderClassName}>
-			<Logo updatePage={setCurrentPage} />
-			<SearchBox favCount={favCount} text={searchText} onChange={onChangeSearch} />
+			<Logo updatePage={setPage} />
+			<SearchBox favCount={favCount} text={searchText} onSearch={onSearch} />
 			<Pagination
 				disabled={!!searchText}
 				page={page}
 				total={totalPage}
-				updatePage={setCurrentPage}
+				updatePage={setPage}
 			/>
 		</div>
 	)
