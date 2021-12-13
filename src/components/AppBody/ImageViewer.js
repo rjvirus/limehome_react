@@ -117,7 +117,7 @@ export default function ImageViewer(props) {
 					</button>
 				)}
 			>
-				<img alt="Fullscreen view" src={images[activeIndex].url} className="full-img" height={"50%"} width={"50%"} />
+				<img alt="Fullscreen view" src={images[activeIndex].url} className="full-img" />
 			</DialogBox>
 		</div>
 	)
