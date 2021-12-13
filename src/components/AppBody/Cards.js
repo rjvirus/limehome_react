@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../common/Card";
+import Card from "./Card";
 
 export default function Cards(props) {
   const { properties, favourites, setFavourites } = props;

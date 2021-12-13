@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Loader from "./Loader";
+import Loader from "../common/Loader";
 import Compressor from 'compressorjs';
-import DialogBox from "./DialogBox";
+import DialogBox from "../common/DialogBox";
 
 export default function ImageViewer(props) {
 	const { images } = props;
