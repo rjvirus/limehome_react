@@ -11,7 +11,7 @@ export default function AppBody(props) {
 		"medium": windowSize === 'sm' || windowSize === 'md'
 	});
 	const notFound = properties?.length && isSearch && filteredProperties.length === 0;
-	const ErrorMsg = <p>Error fetching favourites. Please try again</p>
+	const ErrorMsg = () =>  <p>Error fetching favourites. Please check if local server is running or not</p>;
 	const NoFavMsg = () => <p>No properties marked as favourite.</p>;
 	const GenericMsg = () => <p>No properties match the searched term. Please reset and try again.</p>;
 
