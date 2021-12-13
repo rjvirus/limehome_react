@@ -34,15 +34,21 @@
     padding: 15px;
     border-top: 1px solid #5757584d;
   }
+
+  .card .body .detail-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
   
   .card .name {
     font-weight: 600;
-    font-size: 16px;
+    font-size: 18px;
     text-transform: capitalize;
   }
 
   .card .city {
-    font-size: 16px;
+    font-size: 14px;
     text-transform: capitalize;
   }
 

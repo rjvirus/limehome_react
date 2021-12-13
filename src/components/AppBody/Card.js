@@ -42,8 +42,8 @@ export default function Card(props) {
         <ImageViewer images={images} />
         <div className="body">
           <div>
-            <p className='name'>{name}</p>
-            <p className='city'>{location.countryName}</p>
+            <p className='name'>{location.city} {location.addressLine1}</p>
+            <p className='country'>{location.countryName}</p>
           </div>
           <img
             title={ratingTooltip}
