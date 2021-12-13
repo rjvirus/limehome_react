@@ -11,6 +11,7 @@ export default function AppBody(props) {
 		"medium": windowSize === 'sm' || windowSize === 'md'
 	});
 	const notFound = properties?.length && isSearch && filteredProperties.length === 0;
+	const ErrorMsg = <p>Error fetching favourites. Please try again</p>
 	const NoFavMsg = () => <p>No properties marked as favourite.</p>;
 	const GenericMsg = () => <p>No properties match the searched term. Please reset and try again.</p>;
 
@@ -18,7 +19,7 @@ export default function AppBody(props) {
 		<div className={appBodyClassName}>
 			<Loader show={properties === undefined} />
 			{properties === null && <p>Please check your internet</p>}
-			{notFound && (isFavToggled ? <NoFavMsg /> : <GenericMsg />)}
+			{notFound && (isFavToggled ? (favourites === null ? <ErrorMsg /> : <NoFavMsg />) : <GenericMsg />)}
 			<Cards
 				properties={filteredProperties}
 				setFavourites={setFavourites}

@@ -7,7 +7,7 @@ import AppHeader from './components/AppHeader';
 
 function App(props) {
   const [properties, setProperties] = useState(undefined);
-  const [favourites, setFavourites] = useState([]);
+  const [favourites, setFavourites] = useState(undefined);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const [searchText, setSearchText] = useState('');
@@ -39,7 +39,8 @@ function App(props) {
     }).then(d => {
       return setFavourites(d.data);
     }).catch((e) => {
-      console.error(e.message)
+      console.error(e.message);
+      setFavourites(null);
       console.log("Error fetching data, please check the local server is running or not")
     });
   }, []);
@@ -52,7 +53,7 @@ function App(props) {
         const updatedArrray = [];
         properties.forEach(t => {
           if (isFavToggled(searchText)) { //if show favourite button is activated
-            if (favourites.includes(t.id)) {
+            if (favourites?.includes(t.id)) {
               updatedArrray.push(t)
             }
           } else if (t.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()) || t.location.countryName.toLocaleLowerCase().includes(searchText.toLocaleLowerCase())) {
@@ -81,7 +82,7 @@ function App(props) {
         page={currentPage}
         totalPage={totalPage}
         searchText={searchText}
-        favCount={favourites.length}
+        favCount={favourites?.length}
         setCurrentPage={setCurrentPage}
         onChangeSearch={(txt) => setSearchText(txt)}
       />
