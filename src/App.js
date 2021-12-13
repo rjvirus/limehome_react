@@ -32,8 +32,7 @@ function App(props) {
     fetchFavourites().then(d => {
       return setFavourites(d.data);
     }).catch((e) => {
-      console.error(e.message);
-      setFavourites(null);
+      console.log(e);
       console.log("Error fetching data, please check the local server is running or not")
     });
   }, []);
