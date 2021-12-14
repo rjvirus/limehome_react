@@ -82,12 +82,7 @@ export default function ImageViewer(props) {
 					onClick={() => setIsDialogOpen(true)}
 				/>
 			)}
-			<div
-				className='overlay-bottom-box'
-				disabled={(activeIndex - 1) < 0}
-				title='Number of images'
-				onClick={(e) => onClickChange('prev')}
-			>
+			<div className='overlay-bottom-box' title='Number of images'>
 				<div className="img-count">{activeIndex + 1} / {images?.length}</div>
 			</div>
 			<button
